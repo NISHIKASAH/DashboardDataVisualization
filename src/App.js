@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Navbar from "./Components/Navbar";
+import Result from "./Components/Result";
+import SliderSelect from "./Components/SliderSelect";
+import TenureSelect from "./Components/TenureSelect";
+import { Container, Grid } from "@mui/material";
 
 function App() {
+  //data is an object  and to change its value setData function is used
+  //this are the constant data provide to elem(hardcode)
+  //usings setData  they are dynamicallly change
+  const [data, setData] = useState({
+    homeValue: 3000,
+    downPayment: 3000 * 0.2,
+    loanAmount: 3000 * 0.8,
+    loanTerm: 5,
+    interestRate: 5,
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Container maxWidth="xl" sx={{ marginTop: 4 }}>
+        <Grid container spacing={5} alignItems="center">
+          <Grid item xs={12} md={6}>
+            <SliderSelect data={data} setData={setData} />
+            <TenureSelect data={data} setData={setData} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Result data={data} />
+          </Grid>
+        </Grid>
+      </Container>
     </div>
   );
 }
